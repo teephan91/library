@@ -1,7 +1,18 @@
-let myLibrary = [];
-// const addBook = document.querySelector('button');
+let myLibrary = [
+    {title: 'Brain Rules', author: 'John Medina', pages: 301, readOrNot: 'yes'},
+    {title: 'The Dip', author: 'Seth Godin', pages: 96, readOrNot: 'no'}
+];
+
 const bookDisplay = document.querySelector('#display');
 const bookForm = document.querySelector('form');
+
+for (let i = 0; i < myLibrary.length; i++) {
+    let newLibraryIndex = document.createElement('div');
+    
+    newLibraryIndex.textContent = `Author: ${myLibrary[i].author}, Title: ${myLibrary[i].title}, Pages: ${myLibrary[i].pages}, Read or not: ${myLibrary[i].readOrNot}`;
+    
+    bookDisplay.append(newLibraryIndex);
+}
 
 function Book(author, title, pages, readOrNot) {
     this.author = author;
