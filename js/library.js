@@ -36,15 +36,16 @@ function addBookToLibrary(event) {
     let newBook = new Book(author, title, pages, readOrNot);
 
     myLibrary.push(newBook);
-    displayBook(newBook);
+    updateLibrary(myLibrary);
 
     this.reset();
 }
 
-function displayBook(book) {
+function updateLibrary(library) {
     let newBookDisplay = document.createElement('div');
+    let newLibraryIndex = library[library.length - 1];
 
-    newBookDisplay.textContent = `Author: ${book.author}, Title: ${book.title}, Pages: ${book.pages}, Read or not: ${book.readOrNot}`;
+    newBookDisplay.textContent = `Author: ${newLibraryIndex.author}, Title: ${newLibraryIndex.title}, Pages: ${newLibraryIndex.pages}, Read or not: ${newLibraryIndex.readOrNot}`;
 
     bookDisplay.append(newBookDisplay);
 }
