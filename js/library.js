@@ -8,9 +8,17 @@ const bookForm = document.querySelector('form');
 
 for (let i = 0; i < myLibrary.length; i++) {
     let newLibraryIndex = document.createElement('div');
+    let newTitle = document.createElement('div');
+    let newAuthor = document.createElement('div');
+    let newPages = document.createElement('div');
+    let newRead = document.createElement('div');
+
+    newTitle.textContent = `Title: ${myLibrary[i].title}`;
+    newAuthor.textContent = `Author: ${myLibrary[i].author}`;
+    newPages.textContent = `Pages: ${myLibrary[i].pages}`;
+    newRead.textContent = `Read or not: ${myLibrary[i].readOrNot}`;
     
-    newLibraryIndex.textContent = `Author: ${myLibrary[i].author}, Title: ${myLibrary[i].title}, Pages: ${myLibrary[i].pages}, Read or not: ${myLibrary[i].readOrNot}`;
-    
+    newLibraryIndex.append(newTitle, newAuthor, newPages, newRead);
     bookDisplay.append(newLibraryIndex);
 }
 
