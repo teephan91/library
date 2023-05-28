@@ -22,6 +22,7 @@ for (let i = 0; i < myLibrary.length; i++) {
     newRead.textContent = `Read or not: ${myLibrary[i].readOrNot}`;
     removeBtn.textContent = 'Delete';
     removeBtn.classList.add('remove');
+    removeBtn.addEventListener('click', removeBook);
 
     newLibraryIndex.dataset.indexNumber = i;
     newLibraryIndex.classList.add('book');
@@ -30,13 +31,10 @@ for (let i = 0; i < myLibrary.length; i++) {
     bookDisplay.append(newLibraryIndex);
 }
 
-document.querySelectorAll('.remove').forEach(btn => {
-    btn.addEventListener('click', () => {
-        let oldLibraryIndex = btn.parentElement;
-        updateLibraryRemove(oldLibraryIndex);        
-        oldLibraryIndex.remove();
-    });
-});
+function removeBook() {
+    updateLibraryRemove(this.parentElement);        
+    this.parentElement.remove();
+}
 
 function Book(author, title, pages, readOrNot) {
     this.author = author;
@@ -72,21 +70,26 @@ function updateLibraryAdd(library) {
     let newAuthor = document.createElement('div');
     let newPages = document.createElement('div');
     let newRead = document.createElement('div');
+    let removeBtn = document.createElement('button');
 
     newTitle.textContent = `Title: ${newLibraryIndex.title}`;
     newAuthor.textContent = `Author: ${newLibraryIndex.author}`;
     newPages.textContent = `Pages: ${newLibraryIndex.pages}`;
     newRead.textContent = `Read or not: ${newLibraryIndex.readOrNot}`;
+    removeBtn.textContent = 'Delete';
+    removeBtn.classList.add('remove');
+    removeBtn.addEventListener('click', removeBook);
 
-    newBookDisplay.append(newTitle, newAuthor, newPages, newRead);
+    newBookDisplay.dataset.indexNumber = library.length - 1;
+    newBookDisplay.classList.add('book');
+
+    newBookDisplay.append(newTitle, newAuthor, newPages, newRead, removeBtn);
     bookDisplay.append(newBookDisplay);
 }
 
-let test = document.querySelectorAll('.book');
-
 function updateLibraryRemove(oldLibraryIndex) {
     myLibrary.splice(oldLibraryIndex.dataset.indexNumber, 1);
-    test.forEach((index) => {
+    document.querySelectorAll('.book').forEach((index) => {
         if (index.dataset.indexNumber > oldLibraryIndex.dataset.indexNumber) {
             index.dataset.indexNumber--;
         }
