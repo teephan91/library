@@ -8,39 +8,16 @@ let myLibrary = [
 const bookDisplay = document.querySelector('#display');
 const bookForm = document.querySelector('form');
 
-for (let i = 0; i < myLibrary.length; i++) {
-    var newLibraryIndex = document.createElement('div');
-    let newTitle = document.createElement('div');
-    let newAuthor = document.createElement('div');
-    let newPages = document.createElement('div');
-    let newRead = document.createElement('div');
-    let removeBtn = document.createElement('button');
-
-    newTitle.textContent = `Title: ${myLibrary[i].title}`;
-    newAuthor.textContent = `Author: ${myLibrary[i].author}`;
-    newPages.textContent = `Pages: ${myLibrary[i].pages}`;
-    newRead.textContent = `Read or not: ${myLibrary[i].readOrNot}`;
-    removeBtn.textContent = 'Delete';
-    removeBtn.classList.add('remove');
-    removeBtn.addEventListener('click', removeBook);
-
-    newLibraryIndex.dataset.indexNumber = i;
-    newLibraryIndex.classList.add('book');
-    
-    newLibraryIndex.append(newTitle, newAuthor, newPages, newRead, removeBtn);
-    bookDisplay.append(newLibraryIndex);
-}
-
-function removeBook() {
-    updateLibraryRemove(this.parentElement);        
-    this.parentElement.remove();
-}
-
 function Book(author, title, pages, readOrNot) {
     this.author = author;
     this.title = title;
     this.pages = pages;
     this.readOrNot = readOrNot;
+}
+
+for (let i = 0; i < myLibrary.length; i++) {
+    let newLibraryDisplay = createNewBookIndex(myLibrary[i], i);
+    bookDisplay.append(newLibraryDisplay);
 }
 
 bookForm.addEventListener('submit', addBookToLibrary);
@@ -63,27 +40,37 @@ function addBookToLibrary(event) {
     this.reset();
 }
 
-function updateLibraryAdd(library) {
-    let newBookDisplay = document.createElement('div');
-    let newLibraryIndex = library[library.length - 1];
+function createNewBookIndex(lib, order) {
+    let newBookIndex = document.createElement('div');
     let newTitle = document.createElement('div');
     let newAuthor = document.createElement('div');
     let newPages = document.createElement('div');
     let newRead = document.createElement('div');
     let removeBtn = document.createElement('button');
 
-    newTitle.textContent = `Title: ${newLibraryIndex.title}`;
-    newAuthor.textContent = `Author: ${newLibraryIndex.author}`;
-    newPages.textContent = `Pages: ${newLibraryIndex.pages}`;
-    newRead.textContent = `Read or not: ${newLibraryIndex.readOrNot}`;
+    newTitle.textContent = `Title: ${lib.title}`;
+    newAuthor.textContent = `Author: ${lib.author}`;
+    newPages.textContent = `Pages: ${lib.pages}`;
+    newRead.textContent = `Read or not: ${lib.readOrNot}`;
     removeBtn.textContent = 'Delete';
     removeBtn.classList.add('remove');
     removeBtn.addEventListener('click', removeBook);
 
-    newBookDisplay.dataset.indexNumber = library.length - 1;
-    newBookDisplay.classList.add('book');
+    newBookIndex.dataset.indexNumber = order;
+    newBookIndex.classList.add('book');
+    
+    newBookIndex.append(newTitle, newAuthor, newPages, newRead, removeBtn);
 
-    newBookDisplay.append(newTitle, newAuthor, newPages, newRead, removeBtn);
+    return newBookIndex;
+}
+
+function removeBook() {
+    updateLibraryRemove(this.parentElement);        
+    this.parentElement.remove();
+}
+
+function updateLibraryAdd(library) {
+    let newBookDisplay = createNewBookIndex(library[library.length - 1], library.length - 1);
     bookDisplay.append(newBookDisplay);
 }
 
