@@ -1,26 +1,42 @@
 let myLibrary = [
     {title: 'Brain Rules', author: 'John Medina', pages: 301, readOrNot: 'yes'},
-    {title: 'The Dip', author: 'Seth Godin', pages: 96, readOrNot: 'no'}
+    {title: 'The Dip', author: 'Seth Godin', pages: 96, readOrNot: 'no'},
+    {title: 'Starting Strength', author: 'Mark Rippetoe', pages: 347, readOrNot: 'yes'},
+    {title: 'The Obstacle is the Way', author: 'Ryan Holiday', pages: 224, readOrNot: 'yes'}
 ];
 
 const bookDisplay = document.querySelector('#display');
 const bookForm = document.querySelector('form');
 
 for (let i = 0; i < myLibrary.length; i++) {
-    let newLibraryIndex = document.createElement('div');
+    var newLibraryIndex = document.createElement('div');
     let newTitle = document.createElement('div');
     let newAuthor = document.createElement('div');
     let newPages = document.createElement('div');
     let newRead = document.createElement('div');
+    let removeBtn = document.createElement('button');
 
     newTitle.textContent = `Title: ${myLibrary[i].title}`;
     newAuthor.textContent = `Author: ${myLibrary[i].author}`;
     newPages.textContent = `Pages: ${myLibrary[i].pages}`;
     newRead.textContent = `Read or not: ${myLibrary[i].readOrNot}`;
+    removeBtn.textContent = 'Delete';
+    removeBtn.classList.add('remove');
+
+    newLibraryIndex.dataset.indexNumber = i;
+    newLibraryIndex.classList.add('book');
     
-    newLibraryIndex.append(newTitle, newAuthor, newPages, newRead);
+    newLibraryIndex.append(newTitle, newAuthor, newPages, newRead, removeBtn);
     bookDisplay.append(newLibraryIndex);
 }
+
+document.querySelectorAll('.remove').forEach(btn => {
+    btn.addEventListener('click', () => {
+        let oldLibraryIndex = btn.parentElement;
+        updateLibraryRemove(oldLibraryIndex);        
+        oldLibraryIndex.remove();
+    });
+});
 
 function Book(author, title, pages, readOrNot) {
     this.author = author;
@@ -44,12 +60,12 @@ function addBookToLibrary(event) {
     let newBook = new Book(author, title, pages, readOrNot);
 
     myLibrary.push(newBook);
-    updateLibrary(myLibrary);
+    updateLibraryAdd(myLibrary);
 
     this.reset();
 }
 
-function updateLibrary(library) {
+function updateLibraryAdd(library) {
     let newBookDisplay = document.createElement('div');
     let newLibraryIndex = library[library.length - 1];
     let newTitle = document.createElement('div');
@@ -64,4 +80,15 @@ function updateLibrary(library) {
 
     newBookDisplay.append(newTitle, newAuthor, newPages, newRead);
     bookDisplay.append(newBookDisplay);
+}
+
+let test = document.querySelectorAll('.book');
+
+function updateLibraryRemove(oldLibraryIndex) {
+    myLibrary.splice(oldLibraryIndex.dataset.indexNumber, 1);
+    test.forEach((index) => {
+        if (index.dataset.indexNumber > oldLibraryIndex.dataset.indexNumber) {
+            index.dataset.indexNumber--;
+        }
+    });
 }
