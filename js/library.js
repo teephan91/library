@@ -1,18 +1,18 @@
 let myLibrary = [
-    {title: 'Brain Rules', author: 'John Medina', pages: 301, readOrNot: 'yes'},
-    {title: 'The Dip', author: 'Seth Godin', pages: 96, readOrNot: 'no'},
-    {title: 'Starting Strength', author: 'Mark Rippetoe', pages: 347, readOrNot: 'yes'},
-    {title: 'The Obstacle is the Way', author: 'Ryan Holiday', pages: 224, readOrNot: 'yes'}
+    {title: 'Brain Rules', author: 'John Medina', pages: 301, status: 'yes'},
+    {title: 'The Dip', author: 'Seth Godin', pages: 96, status: 'no'},
+    {title: 'Starting Strength', author: 'Mark Rippetoe', pages: 347, status: 'yes'},
+    {title: 'The Obstacle is the Way', author: 'Ryan Holiday', pages: 224, status: 'yes'}
 ];
 
 const bookDisplay = document.querySelector('#display');
 const bookForm = document.querySelector('form');
 
-function Book(author, title, pages, readOrNot) {
+function Book(author, title, pages, status) {
     this.author = author;
     this.title = title;
     this.pages = pages;
-    this.readOrNot = readOrNot;
+    this.status = status;
 }
 
 for (let i = 0; i < myLibrary.length; i++) {
@@ -30,9 +30,9 @@ function addBookToLibrary(event) {
     let read = document.querySelector('#read');
 
     read.checked === true ? read.value = "yes" : read.value = "no";
-    let readOrNot = read.value;
+    let status = read.value;
 
-    let newBook = new Book(author, title, pages, readOrNot);
+    let newBook = new Book(author, title, pages, status);
 
     myLibrary.push(newBook);
     updateLibraryAdd(myLibrary);
@@ -46,12 +46,18 @@ function createNewBookIndex(lib, order) {
     let newAuthor = document.createElement('div');
     let newPages = document.createElement('div');
     let newRead = document.createElement('div');
+    let switchBtn = document.createElement('button');
     let removeBtn = document.createElement('button');
 
     newTitle.textContent = `Title: ${lib.title}`;
     newAuthor.textContent = `Author: ${lib.author}`;
     newPages.textContent = `Pages: ${lib.pages}`;
-    newRead.textContent = `Read or not: ${lib.readOrNot}`;
+
+    newRead.textContent = `Status: ${lib.status}`;
+    newRead.append(switchBtn);
+    switchBtn.textContent = 'Switch';
+    switchBtn.addEventListener('click', changeStatus);
+
     removeBtn.textContent = 'Delete';
     removeBtn.classList.add('remove');
     removeBtn.addEventListener('click', removeBook);
@@ -81,4 +87,14 @@ function updateLibraryRemove(oldLibraryIndex) {
             index.dataset.indexNumber--;
         }
     });
+}
+
+function changeStatus() {
+    let bookStatus = this.previousSibling;
+
+    if (bookStatus.textContent.includes('yes')) {
+        bookStatus.textContent = bookStatus.textContent.replace('yes', 'no')
+    } else if (bookStatus.textContent.includes('no')) {
+        bookStatus.textContent = bookStatus.textContent.replace('no', 'yes');
+    }
 }
