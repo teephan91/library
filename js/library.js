@@ -56,7 +56,7 @@ function createNewBookIndex(lib, order) {
     newRead.textContent = `Status: ${lib.status}`;
     newRead.append(switchBtn);
     switchBtn.textContent = 'Switch';
-    switchBtn.addEventListener('click', changeStatus);
+    switchBtn.addEventListener('click', changeBookStatus);
 
     removeBtn.textContent = 'Delete';
     removeBtn.classList.add('remove');
@@ -89,12 +89,22 @@ function updateLibraryRemove(oldLibraryIndex) {
     });
 }
 
-function changeStatus() {
+function changeBookStatus() {
     let bookStatus = this.previousSibling;
 
     if (bookStatus.textContent.includes('yes')) {
-        bookStatus.textContent = bookStatus.textContent.replace('yes', 'no')
+        bookStatus.textContent = bookStatus.textContent.replace('yes', 'no');
+        changeLibraryStatus(this.parentElement.parentElement, bookStatus);
     } else if (bookStatus.textContent.includes('no')) {
         bookStatus.textContent = bookStatus.textContent.replace('no', 'yes');
+        changeLibraryStatus(this.parentElement.parentElement, bookStatus);
+    }
+}
+
+function changeLibraryStatus(book, status) {
+    if (status.textContent.includes('no')) {
+    myLibrary[book.dataset.indexNumber].status = 'no';
+    } else if (status.textContent.includes('yes')) {
+    myLibrary[book.dataset.indexNumber].status = 'yes';
     }
 }
