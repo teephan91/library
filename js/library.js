@@ -1,8 +1,7 @@
 let myLibrary = [
     {title: 'Brain Rules', author: 'John Medina', pages: 301, status: 'Read'},
-    {title: 'The Dip', author: 'Seth Godin', pages: 96, status: 'Not Yet'},
-    {title: 'Starting Strength', author: 'Mark Rippetoe', pages: 347, status: 'Read'},
-    {title: 'The Obstacle is the Way', author: 'Ryan Holiday', pages: 224, status: 'Read'}
+    {title: 'The Dip', author: 'Seth Godin', pages: 96, status: 'Read'},
+    {title: 'Catch-22', author: 'Joseph Heller', pages: 453, status: 'Not Yet'}
 ];
 
 const bookDisplay = document.querySelector('#display');
@@ -31,11 +30,7 @@ function addBookToLibrary(event) {
     let status = read.value;
     
     read.checked === true ? read.value = 'yes' : read.value = 'no';
-    if (read.value === 'yes') { 
-        status = 'Read';
-    } else if (read.value === 'no') {
-        status = 'Not Yet'; 
-    }
+    (read.value === 'yes') ? status = 'Read' : status = 'Not Yet'; 
     
     let newBook = new Book(author, title, pages, status);
 
@@ -53,11 +48,12 @@ function createNewBookIndex(lib, order) {
     let switchBtn = document.createElement('button');
     let removeBtn = document.createElement('button');
 
-    newTitle.textContent = `Title: ${lib.title}`;
-    newAuthor.textContent = `Author: ${lib.author}`;
-    newPages.textContent = `Pages: ${lib.pages}`;
+    newTitle.textContent = lib.title;
+    newAuthor.textContent = lib.author;
+    newPages.textContent = `${lib.pages} pages`;
 
-    switchBtn.textContent = `${lib.status}`;
+    switchBtn.textContent = lib.status;
+    switchBtn.textContent.includes('Read') ? switchBtn.classList.add('read') : switchBtn.classList.add('notyet');    
     switchBtn.addEventListener('click', changeBookStatus);
 
     removeBtn.textContent = 'Delete';
@@ -92,13 +88,15 @@ function updateLibraryRemove(oldLibraryIndex) {
 }
 
 function changeBookStatus() {
-    // let bookStatus = this.previousSibling;
-
     if (this.textContent.includes('Read')) {
         this.textContent = this.textContent.replace('Read', 'Not Yet');
+        this.classList.remove('read');
+        this.classList.add('notyet');
         changeLibraryStatus(this.parentElement, this);
     } else if (this.textContent.includes('Not Yet')) {
         this.textContent = this.textContent.replace('Not Yet', 'Read');
+        this.classList.remove('notyet');
+        this.classList.add('read');
         changeLibraryStatus(this.parentElement, this);
     }
 }
