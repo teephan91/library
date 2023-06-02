@@ -192,15 +192,18 @@ footer {
 }
 
 @media only screen and (min-width: 768px) {
-    
+    body {
+        display: block;
+    }
+
     #main {
         display: grid;
-        grid-template-columns: 1fr 4fr;
+        grid-template-columns: 1fr 3fr;
         height: 100vh;
     }
 
     #sidebar {
-        height: 100%;
+        height: 100%; 
         width: 350px;
         display: flex;
         flex-direction: column;
