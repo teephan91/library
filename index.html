@@ -11,44 +11,52 @@
 <body>
     <div id="main">
         <div id="sidebar">
-            <h1>Library</h1>
-            <form>
-                <ul>
-                    <li>
-                        <label for="title">Title:</label>
-                        <input type="text"
-                               id="title"
-                               autocomplete="off"
-                               placeholder="Title"
-                               required>
-                    </li>
-                    <li>
-                        <label for="author">Author: </label>
-                        <input type="text"
-                               id="author"
-                               autocomplete="off"
-                               placeholder="Author"
-                               required>
-                    </li>
-                    <li>
-                        <label for="pages">Number of pages: </label>
-                        <input type="number"
-                               id="pages"
-                               autocomplete="off"
-                               placeholder="Pages"
-                               required>
-                    </li>
-                    <li>
-                        <input type="checkbox"
-                               id="read">
-                        <span>I have already read the book.</span>
-                        <label for="read">I have already read the book.</label>
-                    </li>
-                    <li>
-                        <button type="submit">Add</button>
-                    </li>
-                </ul>
-            </form>
+            <div>
+                <h1>Library</h1>
+                <form>
+                    <ul>
+                        <li>
+                            <label for="title">Title:</label>
+                            <input type="text"
+                                   id="title"
+                                   autocomplete="off"
+                                   placeholder="Title"
+                                   required>
+                        </li>
+                        <li>
+                            <label for="author">Author: </label>
+                            <input type="text"
+                                   id="author"
+                                   autocomplete="off"
+                                   placeholder="Author"
+                                   required>
+                        </li>
+                        <li>
+                            <label for="pages">Number of pages: </label>
+                            <input type="number"
+                                   id="pages"
+                                   autocomplete="off"
+                                   placeholder="Pages"
+                                   required>
+                        </li>
+                        <li>
+                            <input type="checkbox"
+                                   id="read">
+                            <span>I have already read the book.</span>
+                            <label for="read">I have already read the book.</label>
+                        </li>
+                        <li>
+                            <button type="submit">Add</button>
+                        </li>
+                    </ul>
+                </form>
+            </div>
+            <div class="copyright">&copy; Thinh Phan, 
+                <script>
+                    document.write(new Date().getFullYear())
+                </script> 
+                <a href="https://github.com/teephan91" target="_blank"><img class="github" src="img/github_logo.png" alt="Github logo"></a>
+            </div>
         </div>
         <div id="display"></div>
     </div>
