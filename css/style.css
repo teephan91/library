@@ -114,6 +114,19 @@ body {
                     font-size: 1.5rem;
                     color: #ffffff;
                     background-color: #34b233;
+                    box-shadow: 0 10px cadetblue;
+                }
+
+                button[type="submit"]:hover {
+                    background-color: green;
+                    box-shadow: 0 5px cadetblue;
+                    transform: translateY(5px);
+                }
+
+                button[type="submit"]:active {
+                    background-color: green;
+                    box-shadow: none;
+                    transform: translateY(10px);
                 }
     
     .copyright {
@@ -152,9 +165,25 @@ body {
         border: none;
         border-radius: 15px;
         padding: .5rem;
+        margin-bottom: .5rem;
         font-family: Lato, sans-serif;
         font-size: 1rem; 
-        background-color: #e7e5e4;   
+        background-color: azure; 
+        box-shadow: 0 6px lightgrey;
+    }
+
+    .read:hover,
+    .notyet:hover {
+        background-color: #ffffff;
+        box-shadow: 0 2px lightgrey;
+        transform: translateY(4px);
+    }
+
+    .read:active,
+    .notyet:active {
+        background-color: #ffffff;
+        box-shadow: none;
+        transform: translateY(6px);
     }
 
         .read {
@@ -173,7 +202,20 @@ body {
         font-family: Lato, sans-serif;
         font-size: 1rem;
         color: #ffffff;
+        background-color: firebrick;
+        box-shadow: 0 6px crimson;
+    }
+
+    .remove:hover {
         background-color: maroon;
+        box-shadow: 0 2px crimson;
+        transform: translateY(4px);
+    }
+
+    .remove:active {
+        background-color: maroon;
+        box-shadow: none;
+        transform: translateY(6px);
     }
     
 footer {
