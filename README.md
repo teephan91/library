@@ -1,5 +1,5 @@
 # Library
-![library_screenshot](https://github.com/teephan91/library/assets/101987153/ecc2635f-845e-408b-b2b7-98088eefc984)
+![library_screenshot](https://github.com/teephan91/library/assets/101987153/af712e27-50c6-405e-b992-2c84316ef85e)
 
 ## About
 This is a virtual library app where users can input the author, title, and number of pages of their favorite books. They can change the status of each book, to whether they've already read it or not. Users can also delete books so they have space for new ones. Everything is stored inside an array and the program will update it based on users' actions.
