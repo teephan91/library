@@ -19,7 +19,17 @@ for (let i = 0; i < myLibrary.length; i++) {
     bookDisplay.append(newLibraryDisplay);
 }
 
-bookForm.addEventListener('submit', addBookToLibrary);
+bookForm.addEventListener('submit', (event) => {
+    let titleValidation = validate("title");
+    let authorValidation = validate("author");
+    let pagesValidation = validate("pages");
+
+    if (titleValidation === false || authorValidation === false || pagesValidation === false) {
+       event.preventDefault();
+    } else {
+       addBookToLibrary(event);
+    }
+});
 
 function addBookToLibrary(event) {
     event.preventDefault();
@@ -37,7 +47,7 @@ function addBookToLibrary(event) {
     myLibrary.push(newBook);
     updateLibraryAdd(myLibrary);
 
-    this.reset();
+    bookForm.reset();
 }
 
 function createNewBookIndex(lib, order) {
@@ -107,4 +117,17 @@ function changeLibraryStatus(book, status) {
     } else if (status.textContent.includes('Read')) {
     myLibrary[book.dataset.indexNumber].status = 'Read';
     }
+}
+
+function validate(inputID) {
+    const input = document.getElementById(inputID);
+    const validityState = input.validity;
+
+    if (validityState.valueMissing) {
+        input.setCustomValidity("Don't forget to fill this one in!");
+    } else {
+        input.setCustomValidity("");
+    }
+
+    return input.reportValidity();
 }
